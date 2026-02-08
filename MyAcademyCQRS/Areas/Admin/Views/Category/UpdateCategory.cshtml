@@ -1,0 +1,17 @@
+﻿@model GetCategoryByIdQueryResult
+@{
+    ViewData["Title"] = "UpdateCategory";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Update Category</h1>
+
+
+<form method="post">
+    <input type="hidden" asp-for="Id"/>
+
+    <label>Category Name</label>
+    <input type="text" asp-for="Name" class="form-control"/>
+    <br />
+    <button class="btn btn-dark">Update</button>
+</form>
