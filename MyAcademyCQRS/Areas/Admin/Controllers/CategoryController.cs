@@ -11,12 +11,16 @@ namespace MyAcademyCQRS.Areas.Admin.Controllers
         private readonly GetCategoriesQueryHandler _getCategoriesQueryHandler;
         private readonly GetCategoryByIdQueryHandler _getCategoryByIdQueryHandler;
         private readonly UpdateCategoryCommandHandler _updateCategoryCommandHandler;
+        private readonly CreateCategoryCommandHandler _createCategoryCommandHandler;
+        private readonly RemoveCategoryCommandHandler _removeCategoryCommandHandler;
 
-        public CategoryController(GetCategoriesQueryHandler getCategoriesQueryHandler, GetCategoryByIdQueryHandler getCategoryByIdQueryHandler, UpdateCategoryCommandHandler updateCategoryCommandHandler)
+        public CategoryController(GetCategoriesQueryHandler getCategoriesQueryHandler, GetCategoryByIdQueryHandler getCategoryByIdQueryHandler, UpdateCategoryCommandHandler updateCategoryCommandHandler, CreateCategoryCommandHandler createCategoryCommandHandler, RemoveCategoryCommandHandler removeCategoryCommandHandler)
         {
             _getCategoriesQueryHandler = getCategoriesQueryHandler;
             _getCategoryByIdQueryHandler = getCategoryByIdQueryHandler;
             _updateCategoryCommandHandler = updateCategoryCommandHandler;
+            _createCategoryCommandHandler = createCategoryCommandHandler;
+            _removeCategoryCommandHandler = removeCategoryCommandHandler;
         }
 
         public async Task<IActionResult> Index()
@@ -39,6 +43,23 @@ namespace MyAcademyCQRS.Areas.Admin.Controllers
             return RedirectToAction("Index");
         }
 
+        public IActionResult CreateCategory()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> CreateCategory(CreateCategoryCommand command)
+        {
+            await _createCategoryCommandHandler.Handle(command);
+            return RedirectToAction("Index");
+        }
+
+        public async Task<IActionResult> DeleteCategory(int id)
+        {
+            await _removeCategoryCommandHandler.Handle(new RemoveCategoryCommand(id));
+            return RedirectToAction("Index");
+        }
 
     }
 }

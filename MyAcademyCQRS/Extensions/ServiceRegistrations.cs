@@ -1,4 +1,5 @@
 ﻿using MyAcademyCQRS.CQRSPattern.Handlers.CategoryHandlers;
+using System.Reflection;
 
 namespace MyAcademyCQRS.Extensions
 {
@@ -9,6 +10,15 @@ namespace MyAcademyCQRS.Extensions
             services.AddScoped<GetCategoriesQueryHandler>();
             services.AddScoped<GetCategoryByIdQueryHandler>();
             services.AddScoped<UpdateCategoryCommandHandler>();
+            services.AddScoped<CreateCategoryCommandHandler>();
+            services.AddScoped<RemoveCategoryCommandHandler>();
         }
+
+        public static void AddPackageExtensions(this IServiceCollection services) 
+        {
+            services.AddAutoMapper(Assembly.GetExecutingAssembly());
+        
+        }
+
     }
 }

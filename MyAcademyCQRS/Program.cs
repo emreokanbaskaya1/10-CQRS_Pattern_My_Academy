@@ -1,11 +1,13 @@
 using MyAcademyCQRS.Context;
 using MyAcademyCQRS.Extensions;
+using System.Reflection;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddDbContext<AppDbContext>();
 builder.Services.AddCQRSHandlers();
+builder.Services.AddPackageExtensions();
 
 
 builder.Services.AddControllersWithViews();

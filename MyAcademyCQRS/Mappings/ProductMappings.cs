@@ -1,0 +1,14 @@
+﻿using AutoMapper;
+using MyAcademyCQRS.CQRSPattern.Results.ProductResults;
+using MyAcademyCQRS.Entities;
+
+namespace MyAcademyCQRS.Mappings
+{
+    public class ProductMappings: Profile
+    {
+        public ProductMappings()
+        {
+            CreateMap<Product, GetProductsQueryResult>();
+        }
+    }
+}
