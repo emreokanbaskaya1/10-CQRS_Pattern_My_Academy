@@ -1,0 +1,29 @@
+﻿@model CreateProductCommand
+@{
+    ViewData["Title"] = "CreateProduct";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Create Product</h1>
+
+<form method="post">
+    <label>Product Name</label>
+    <input type="text" asp-for="Name" class="form-control"/>
+    <br />
+    <label>Description</label>
+    <input type="text" asp-for="Description" class="form-control" />
+    <br />
+    <label>Image Url</label>
+    <input type="text" asp-for="ImageUrl" class="form-control" />
+    <br />
+    <label>Price</label>
+    <input type="text" asp-for="Price" class="form-control" />
+    <br />
+    <label>Product Name</label>
+    <select asp-for="CategoryId" class="form-control" asp-items="@ViewBag.categories">
+        <option>---Select Category---</option>
+    </select>
+    <br />
+    <button class="btn btn-dark">Save</button>
+
+</form>

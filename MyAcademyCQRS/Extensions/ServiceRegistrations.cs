@@ -1,4 +1,5 @@
 ﻿using MyAcademyCQRS.CQRSPattern.Handlers.CategoryHandlers;
+using MyAcademyCQRS.CQRSPattern.Handlers.ProductHandlers;
 using System.Reflection;
 
 namespace MyAcademyCQRS.Extensions
@@ -12,6 +13,8 @@ namespace MyAcademyCQRS.Extensions
             services.AddScoped<UpdateCategoryCommandHandler>();
             services.AddScoped<CreateCategoryCommandHandler>();
             services.AddScoped<RemoveCategoryCommandHandler>();
+            services.AddScoped<GetProductsQueryHandler>();
+            services.AddScoped<CreateProductCommandHandler>();
         }
 
         public static void AddPackageExtensions(this IServiceCollection services) 
