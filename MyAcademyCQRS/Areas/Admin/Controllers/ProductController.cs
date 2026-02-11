@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using MyAcademyCQRS.CQRSPattern.Commands.ProductCommands;
 using MyAcademyCQRS.CQRSPattern.Handlers.CategoryHandlers;
 using MyAcademyCQRS.CQRSPattern.Handlers.ProductHandlers;
+using MyAcademyCQRS.CQRSPattern.Queries.ProductQueries;
 
 namespace MyAcademyCQRS.Areas.Admin.Controllers
 {
@@ -10,7 +11,10 @@ namespace MyAcademyCQRS.Areas.Admin.Controllers
     [Area("Admin")]
     public class ProductController(GetProductsQueryHandler getProductsQueryHandler,
                                    GetCategoriesQueryHandler getCategoriesQueryHandler,
-                                   CreateProductCommandHandler createProductCommandHandler) : Controller
+                                   CreateProductCommandHandler createProductCommandHandler,
+                                   UpdateProductCommandHandler updateProductCommandHandler,
+                                   RemoveProductCommandHandler removeProductCommandHandler,
+                                   GetProductByIdQueryHandler getProductByIdQueryHandler) : Controller
     {
 
         public async Task GetCategoriesAsync()
@@ -44,6 +48,26 @@ namespace MyAcademyCQRS.Areas.Admin.Controllers
             return RedirectToAction("Index");
         }
 
+
+        public async Task<IActionResult> UpdateProduct(int id)
+        {
+            await GetCategoriesAsync();
+            var product = await getProductByIdQueryHandler.Handle(new GetProductByIdQuery(id));
+            return View(product);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> UpdateProduct(UpdateProductCommand command)
+        {
+            await updateProductCommandHandler.Handle(command);
+            return RedirectToAction("Index");
+        }
+
+        public async Task<IActionResult> DeleteProduct(int id)
+        {
+            await removeProductCommandHandler.Handle(new RemoveProductCommand(id));
+            return RedirectToAction("Index");
+        }
 
     }
 }

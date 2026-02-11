@@ -11,6 +11,8 @@ namespace MyAcademyCQRS.Mappings
         {
             CreateMap<Product, GetProductsQueryResult>();
             CreateMap<CreateProductCommand, Product>();
+            CreateMap<Product, GetProductByIdQueryResult>();
+            CreateMap<UpdateProductCommand, Product>();
         }
     }
 }

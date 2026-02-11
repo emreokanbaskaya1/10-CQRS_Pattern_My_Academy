@@ -1,14 +1,15 @@
-﻿@model CreateProductCommand
+﻿@model GetProductByIdQueryResult
 @{
-    ViewData["Title"] = "CreateProduct";
+    ViewData["Title"] = "UpdateProduct";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h1>Create Product</h1>
+<h1>Update Product</h1>
 
 <form method="post">
+    <input type="hidden" asp-for="Id"/>
     <label>Product Name</label>
-    <input type="text" asp-for="Name" class="form-control"/>
+    <input type="text" asp-for="Name" class="form-control" />
     <br />
     <label>Description</label>
     <input type="text" asp-for="Description" class="form-control" />
@@ -19,11 +20,10 @@
     <label>Price</label>
     <input type="text" asp-for="Price" class="form-control" />
     <br />
-    <label>Category Name</label>
+    <label>Category</label>
     <select asp-for="CategoryId" class="form-control" asp-items="@ViewBag.categories">
         <option>---Select Category---</option>
     </select>
     <br />
-    <button class="btn btn-dark">Save</button>
-
+    <button class="btn btn-dark">Update</button>
 </form>
